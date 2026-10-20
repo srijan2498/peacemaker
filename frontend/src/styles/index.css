@@ -1,0 +1,91 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg-main: #FFFDF8;
+    --card-surface: #FFFFFF;
+    --text-primary: #292D35;
+    --text-secondary: #858996;
+    --accent-lavender: #A78BFA;
+    --accent-mint: #B7E4C7;
+    --accent-peach: #FFD6BA;
+    --accent-pink: #FADADD;
+    --accent-sky: #D9EEFF;
+    --accent-yellow: #FFF1BA;
+  }
+
+  .dark {
+    --bg-main: #13151A;
+    --card-surface: #1C2029;
+    --text-primary: #F3F4F6;
+    --text-secondary: #9CA3AF;
+  }
+
+  body {
+    font-family: 'Plus Jakarta Sans', Nunito, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+  }
+}
+
+/* Custom Cozy Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(167, 139, 250, 0.25);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(167, 139, 250, 0.45);
+}
+
+/* Glassmorphism card utilities */
+.cozy-glass {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(240, 234, 255, 0.8);
+}
+
+.dark .cozy-glass {
+  background: rgba(28, 32, 41, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Smooth Interactive Card Hover */
+.cozy-card {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cozy-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px -4px rgba(167, 139, 250, 0.14);
+}
+
+/* Pulse breathing animation for relaxation */
+@keyframes calm-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+.animate-calm-pulse {
+  animation: calm-pulse 4s ease-in-out infinite;
+}

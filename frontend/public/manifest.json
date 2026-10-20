@@ -1,0 +1,78 @@
+{
+  "id": "/?source=pwa",
+  "name": "CozyNest — Family Lifestyle, Health & Finance",
+  "short_name": "CozyNest",
+  "description": "Your all-in-one family sanctuary: track daily health vitals, clinical sleep patterns, smart grocery stock, recipes, and household finances.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0B0F19",
+  "theme_color": "#6366F1",
+  "lang": "en",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "categories": ["lifestyle", "finance", "health", "productivity", "family"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Health & Vitals",
+      "short_name": "Health",
+      "description": "Daily vitals, sleep hypnogram, and wellness",
+      "url": "/health",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Household Expenses",
+      "short_name": "Expenses",
+      "description": "Log and track family spending",
+      "url": "/expenses",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Smart Recipe Kitchen",
+      "short_name": "Recipes",
+      "description": "Browse 10,000+ meals and cooking guides",
+      "url": "/health?tab=recipes",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Reminders & Alerts",
+      "short_name": "Reminders",
+      "description": "Bill payments and medication schedule",
+      "url": "/reminders",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
