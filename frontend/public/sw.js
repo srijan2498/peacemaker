@@ -1,5 +1,5 @@
 // CozyNest Progressive Web App Service Worker
-const CACHE_NAME = 'cozynest-cache-v1';
+const CACHE_NAME = 'cozynest-cache-v2';
 
 const STATIC_ASSETS = [
   '/',
@@ -38,35 +38,42 @@ self.addEventListener('activate', event => {
   );
 });
 
+// Helper: Determine if URL is a same-origin static asset
+const isStaticAsset = (url) => {
+  return (
+    STATIC_ASSETS.includes(url.pathname) ||
+    url.pathname.startsWith('/assets/') ||
+    url.pathname.startsWith('/icons/') ||
+    /\.(js|css|png|jpg|jpeg|svg|webp|ico|woff|woff2|ttf|json)$/i.test(url.pathname)
+  );
+};
+
 // Fetch Event: Smart Caching Strategy
 self.addEventListener('fetch', event => {
   const request = event.request;
   const url = new URL(request.url);
 
-  // Skip non-GET requests
+  // Skip non-GET requests immediately
   if (request.method !== 'GET') {
     return;
   }
 
-  // 1. API Requests: Network first, fallback to offline response
-  if (url.pathname.startsWith('/api/')) {
+  // 1. Same-origin API Requests: Network first, fallback to offline response
+  if (url.origin === self.location.origin && url.pathname.startsWith('/api/')) {
     event.respondWith(
       fetch(request)
         .then(response => {
-          // If valid response, clone and cache for offline reading if needed
           if (response && response.status === 200) {
             const copy = response.clone();
             caches.open(CACHE_NAME).then(cache => {
-              // Cache recent vitals / user info if desired
               if (url.pathname.includes('/health/') || url.pathname.includes('/users/')) {
-                cache.put(request, copy);
+                cache.put(request, copy).catch(() => {});
               }
             });
           }
           return response;
         })
         .catch(async () => {
-          // If network failed, check cache
           const cached = await caches.match(request);
           if (cached) return cached;
           return new Response(
@@ -85,43 +92,51 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // 2. Navigation Requests (HTML / Page routing): Stale-while-revalidate with index.html fallback
+  // 2. Navigation Requests (HTML / Page routing): Network first with index.html fallback
   if (request.mode === 'navigate') {
     event.respondWith(
       fetch(request).catch(async () => {
         const cached = await caches.match('/index.html');
-        return cached || caches.match('/');
+        return cached || caches.match('/') || new Response('Offline', { status: 503, headers: { 'Content-Type': 'text/html' } });
       })
     );
     return;
   }
 
-  // 3. Static Assets (Scripts, CSS, Fonts, Images): Cache First with background refresh
-  event.respondWith(
-    caches.match(request).then(cachedResponse => {
-      if (cachedResponse) {
-        // Fetch in background to update cache
-        fetch(request)
-          .then(networkResponse => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(CACHE_NAME).then(cache => cache.put(request, networkResponse));
-            }
-          })
-          .catch(() => {});
-        return cachedResponse;
-      }
-
-      return fetch(request).then(networkResponse => {
-        if (!networkResponse || networkResponse.status !== 200 || networkResponse.type !== 'basic') {
-          return networkResponse;
+  // 3. Same-origin Static Assets: Cache First with background refresh and error resilience
+  if (url.origin === self.location.origin && isStaticAsset(url)) {
+    event.respondWith(
+      caches.match(request).then(cachedResponse => {
+        if (cachedResponse) {
+          fetch(request)
+            .then(networkResponse => {
+              if (networkResponse && networkResponse.status === 200) {
+                caches.open(CACHE_NAME).then(cache => cache.put(request, networkResponse)).catch(() => {});
+              }
+            })
+            .catch(() => {});
+          return cachedResponse;
         }
-        const toCache = networkResponse.clone();
-        caches.open(CACHE_NAME).then(cache => cache.put(request, toCache));
-        return networkResponse;
-      });
-    })
-  );
-});
+
+        return fetch(request)
+          .then(networkResponse => {
+            if (!networkResponse || networkResponse.status !== 200) {
+              return networkResponse;
+            }
+            const toCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then(cache => cache.put(request, toCache)).catch(() => {});
+            return networkResponse;
+          })
+          .catch(() => {
+            return new Response('', { status: 408, statusText: 'Request timed out' });
+          });
+      })
+    );
+    return;
+  }
+
+  // For all other requests (cross-origin, backend API, DevTools cache-bypass checks),
+  // do NOT call event.respondWith(); let the browser handle them natively.
 
 // Listen for message events (e.g. force skip waiting)
 self.addEventListener('message', event => {

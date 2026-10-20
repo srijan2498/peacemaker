@@ -45,8 +45,8 @@ export const LoginPage: React.FC = () => {
   };
 
   const fillDemoCredentials = () => {
-    setValue('email', 'demo@cozynest.app');
-    setValue('password', 'cozy123456');
+    setValue('email', 'demo@cozynest.app', { shouldValidate: true, shouldDirty: true });
+    setValue('password', 'cozy123456', { shouldValidate: true, shouldDirty: true });
     toast.info('Filled demo credentials! Click Sign In to continue.');
   };
 

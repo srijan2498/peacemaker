@@ -54,19 +54,25 @@ const authLimiter = rateLimit({
 });
 app.use('/api/v1/auth/login', authLimiter);
 app.use('/api/v1/auth/register', authLimiter);
+app.use('/auth/login', authLimiter);
+app.use('/auth/register', authLimiter);
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
+// Health check endpoints
+const healthHandler = (_req: express.Request, res: express.Response) => {
   res.status(200).json({
     status: 'healthy',
     app: 'CozyNest API',
     uptime: process.uptime(),
     timestamp: new Date().toISOString()
   });
-});
+};
+app.get('/api/health', healthHandler);
+app.get('/health', healthHandler);
+app.get('/', healthHandler);
 
-// Mount primary API v1 router
+// Mount primary API routers: both /api/v1 and root / for resilience
 app.use('/api/v1', apiRouter);
+app.use('/', apiRouter);
 
 // Central error handler
 app.use(errorHandler);
