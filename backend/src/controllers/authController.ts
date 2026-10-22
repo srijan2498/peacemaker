@@ -13,10 +13,11 @@ function generateToken(userId: string, email: string): string {
 }
 
 function setAuthCookie(res: Response, token: string): void {
+  const isProd = process.env.NODE_ENV === 'production' || env.COOKIE_SECURE;
   res.cookie('token', token, {
     httpOnly: true,
-    secure: env.COOKIE_SECURE,
-    sameSite: 'lax',
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax',
     maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days
   });
 }
@@ -148,7 +149,12 @@ export async function login(req: Request, res: Response): Promise<void> {
 }
 
 export async function logout(req: Request, res: Response): Promise<void> {
-  res.clearCookie('token');
+  const isProd = process.env.NODE_ENV === 'production' || env.COOKIE_SECURE;
+  res.clearCookie('token', {
+    httpOnly: true,
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax'
+  });
   res.status(200).json({ success: true, message: 'Logged out successfully.' });
 }
 
