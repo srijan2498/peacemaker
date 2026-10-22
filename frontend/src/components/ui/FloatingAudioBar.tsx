@@ -4,7 +4,7 @@ import { Play, Pause, Volume2, Moon, X, Sparkles } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 export const FloatingAudioBar: React.FC = () => {
-  const { currentTrack, isPlaying, togglePlay, volume, setVolume, pauseTrack, sleepTimerSecondsLeft } =
+  const { currentTrack, isPlaying, togglePlay, volume, setVolume, stopTrack, sleepTimerSecondsLeft } =
     useAudioStore();
   const navigate = useNavigate();
 
@@ -73,9 +73,11 @@ export const FloatingAudioBar: React.FC = () => {
           </button>
 
           <button
-            onClick={pauseTrack}
+            type="button"
+            onClick={stopTrack}
             className="p-1.5 rounded-xl hover:bg-cozy-lavender-soft dark:hover:bg-purple-900/40 text-cozy-muted hover:text-rose-500 transition-colors"
-            title="Stop audio"
+            title="Close audio player"
+            aria-label="Close audio player"
           >
             <X className="w-4 h-4" />
           </button>

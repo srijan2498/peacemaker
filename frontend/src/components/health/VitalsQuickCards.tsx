@@ -776,8 +776,8 @@ export const VitalsQuickCards: React.FC<VitalsQuickCardsProps> = ({
 
       {/* Water Alert Settings Modal */}
       {isWaterAlertModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-cyan-100 dark:border-cyan-900/40 shadow-soft-xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-cyan-100 dark:border-cyan-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <div className="flex items-center justify-between pb-2 border-b border-cyan-50 dark:border-cyan-900/20">
               <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">
                 <WaterDropOutlinedIcon sx={{ fontSize: 18 }} className="text-cyan-600" />
@@ -880,8 +880,8 @@ export const VitalsQuickCards: React.FC<VitalsQuickCardsProps> = ({
 
       {/* Manual Steps Modal - Clean inputs without prepopulated values */}
       {isStepsOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-sky-100 dark:border-sky-900/40 shadow-soft-xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-sky-100 dark:border-sky-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">
               <DirectionsWalkOutlinedIcon sx={{ fontSize: 20 }} className="text-sky-600" />
               <span>Record Today's Steps</span>
@@ -913,8 +913,8 @@ export const VitalsQuickCards: React.FC<VitalsQuickCardsProps> = ({
 
       {/* Record BP Modal - Clean inputs */}
       {bpModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-rose-100 dark:border-rose-900/40 shadow-soft-xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-rose-100 dark:border-rose-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">
               <MonitorHeartOutlinedIcon sx={{ fontSize: 20 }} className="text-rose-600" />
               <span>Record Blood Pressure</span>
@@ -969,8 +969,8 @@ export const VitalsQuickCards: React.FC<VitalsQuickCardsProps> = ({
 
       {/* Record Weight Modal - Clean inputs */}
       {weightModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-emerald-100 dark:border-emerald-900/40 shadow-soft-xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-sm rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-emerald-100 dark:border-emerald-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">
               <ScaleOutlinedIcon sx={{ fontSize: 20 }} className="text-emerald-600" />
               <span>Record Weight & Height</span>
@@ -1013,8 +1013,8 @@ export const VitalsQuickCards: React.FC<VitalsQuickCardsProps> = ({
 
       {/* Auto Pedometer Hardware Monitor Modal */}
       {isPedometerModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-sky-100 dark:border-sky-900/40 shadow-soft-xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/50 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-sky-100 dark:border-sky-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <div className="flex items-center justify-between pb-2 border-b border-sky-50 dark:border-sky-900/20">
               <div className="flex items-center gap-2">
                 <span className="p-2 rounded-2xl bg-sky-100 text-sky-600 dark:bg-sky-900/50 dark:text-sky-300">

@@ -371,8 +371,8 @@ export const BillVaultTab: React.FC<BillVaultTabProps> = ({
 
       {/* Upload Bill Modal */}
       {isUploadModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-4 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <div className="flex items-center justify-between pb-2 border-b border-purple-50 dark:border-purple-900/20">
               <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">
                 <ReceiptLongOutlinedIcon className="w-5 h-5 text-emerald-600" />
@@ -555,8 +555,8 @@ export const BillVaultTab: React.FC<BillVaultTabProps> = ({
 
       {/* Document In-Browser Preview Modal */}
       {selectedBillForPreview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-2xl rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-4 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-2xl rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] my-auto flex flex-col">
             <div className="flex items-center justify-between pb-3 border-b border-purple-50 dark:border-purple-900/20 shrink-0">
               <div>
                 <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">

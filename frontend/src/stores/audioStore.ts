@@ -20,6 +20,7 @@ interface AudioState {
 
   playTrack: (track: AudioTrackSummary) => void;
   pauseTrack: () => void;
+  stopTrack: () => void;
   togglePlay: () => void;
   setVolume: (vol: number) => void;
   addMixerTrack: (track: AudioTrackSummary) => void;
@@ -67,6 +68,11 @@ export const useAudioStore = create<AudioState>((set, get) => ({
   pauseTrack: () => {
     audioEngine.stopAll();
     set({ isPlaying: false });
+  },
+
+  stopTrack: () => {
+    audioEngine.stopAll();
+    set({ isPlaying: false, currentTrack: null, mixerTracks: [] });
   },
 
   togglePlay: () => {

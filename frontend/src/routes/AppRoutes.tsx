@@ -39,7 +39,7 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
   }
 
   if (!isAuthenticated) {
-    return <Navigate to="/welcome" state={{ from: location }} replace />;
+    return <Navigate to="/login" state={{ from: location }} replace />;
   }
 
   return <>{children}</>;
@@ -49,9 +49,32 @@ const ProtectedRoute: React.FC<{ children: React.ReactNode }> = ({ children }) =
 const PublicOnlyRoute: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isAuthenticated, isLoading } = useAuthStore();
 
-  if (isLoading) return null;
-  if (isAuthenticated) return <Navigate to="/" replace />;
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-cozy-bg dark:bg-cozy-darkBg">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-12 h-12 rounded-3xl bg-cozy-lavender flex items-center justify-center text-2xl animate-bounce">
+            🏡
+          </div>
+          <p className="text-xs font-bold text-cozy-muted animate-pulse">Checking session...</p>
+        </div>
+      </div>
+    );
+  }
+  if (isAuthenticated) {
+    return <Navigate to="/" replace />;
+  }
   return <>{children}</>;
+};
+
+// Fallback Catch All Guard
+const CatchAllRoute: React.FC = () => {
+  const { isAuthenticated, isLoading } = useAuthStore();
+  if (isLoading) return null;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+  return <NotFoundPage />;
 };
 
 export const AppRoutes: React.FC = () => {
@@ -65,14 +88,10 @@ export const AppRoutes: React.FC = () => {
 
   return (
     <Routes>
-      {/* Public Pages */}
+      {/* Public Pages: Logged-in users cannot access, redirect to / */}
       <Route
         path="/welcome"
-        element={
-          <PublicOnlyRoute>
-            <LandingPage />
-          </PublicOnlyRoute>
-        }
+        element={<Navigate to="/login" replace />}
       />
       <Route
         path="/login"
@@ -90,7 +109,14 @@ export const AppRoutes: React.FC = () => {
           </PublicOnlyRoute>
         }
       />
-      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+      <Route
+        path="/forgot-password"
+        element={
+          <PublicOnlyRoute>
+            <ForgotPasswordPage />
+          </PublicOnlyRoute>
+        }
+      />
 
       {/* Onboarding */}
       <Route
@@ -123,8 +149,8 @@ export const AppRoutes: React.FC = () => {
         <Route path="/settings" element={<SettingsPage />} />
       </Route>
 
-      {/* 404 Catch All */}
-      <Route path="*" element={<NotFoundPage />} />
+      {/* Catch All: Redirect unauthenticated visitors straight to /login */}
+      <Route path="*" element={<CatchAllRoute />} />
     </Routes>
   );
 };

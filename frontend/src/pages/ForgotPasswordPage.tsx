@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { api } from '../services/api';
+import { useAuthStore } from '../stores/authStore';
 import { Input } from '../components/ui/Input';
 import { Button } from '../components/ui/Button';
 import { toast } from 'sonner';
@@ -8,12 +9,19 @@ import { Mail, KeyRound, Lock, ArrowLeft } from 'lucide-react';
 
 export const ForgotPasswordPage: React.FC = () => {
   const navigate = useNavigate();
+  const { isAuthenticated } = useAuthStore();
   const [email, setEmail] = useState('');
   const [resetToken, setResetToken] = useState<string | null>(null);
   const [securityQuestion, setSecurityQuestion] = useState<string | null>(null);
   const [securityAnswer, setSecurityAnswer] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleRequestToken = async (e: React.FormEvent) => {
     e.preventDefault();

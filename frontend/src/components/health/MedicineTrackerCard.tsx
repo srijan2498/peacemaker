@@ -384,8 +384,8 @@ export const MedicineTrackerCard: React.FC<MedicineTrackerCardProps> = ({
 
       {/* Add Medication Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-emerald-100 dark:border-emerald-900/40 shadow-soft-xl space-y-4 max-h-[90vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/40 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-md rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-emerald-100 dark:border-emerald-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
             <div className="flex items-center justify-between pb-2 border-b border-emerald-50 dark:border-emerald-900/20">
               <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText flex items-center gap-2">
                 <MedicationOutlinedIcon sx={{ fontSize: 20 }} className="text-emerald-600" />

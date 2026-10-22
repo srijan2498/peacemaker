@@ -18,7 +18,8 @@ import {
   Radio,
   Disc3,
   Coffee,
-  CheckCircle2
+  CheckCircle2,
+  X
 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { AudioTrackSummary } from 'cozynest-shared';
@@ -29,6 +30,7 @@ export const JazzMusicTab: React.FC = () => {
     currentTrack,
     isPlaying,
     playTrack,
+    stopTrack,
     togglePlay,
     volume,
     setVolume,
@@ -143,9 +145,20 @@ export const JazzMusicTab: React.FC = () => {
                 size="sm"
                 onClick={togglePlay}
                 className="p-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white"
+                title={isPlaying ? 'Pause' : 'Play'}
+                aria-label={isPlaying ? 'Pause' : 'Play'}
               >
                 {isPlaying ? <Pause className="w-4 h-4 fill-current" /> : <Play className="w-4 h-4 fill-current ml-0.5" />}
               </Button>
+              <button
+                type="button"
+                onClick={stopTrack}
+                className="p-1.5 rounded-xl text-white/70 hover:text-white hover:bg-white/20 transition-colors"
+                title="Stop & Close Player"
+                aria-label="Stop & Close Player"
+              >
+                <X className="w-4 h-4" />
+              </button>
             </div>
           )}
         </div>

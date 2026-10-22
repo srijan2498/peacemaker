@@ -1702,8 +1702,8 @@ export const ExpensesPage: React.FC = () => {
 
       {/* ================= MODAL: DOCUMENT PREVIEW (BILLS & RECEIPTS) ================= */}
       {previewDocument && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="w-full max-w-2xl rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-4 max-h-[90vh] flex flex-col">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div className="w-full max-w-2xl rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-4 max-h-[calc(100dvh-1.5rem)] my-auto flex flex-col">
             <div className="flex items-center justify-between pb-3 border-b border-purple-50 dark:border-purple-900/20 shrink-0">
               <div className="min-w-0 pr-3">
                 <h3 className="text-base font-bold text-cozy-text dark:text-cozy-darkText truncate flex items-center gap-2">

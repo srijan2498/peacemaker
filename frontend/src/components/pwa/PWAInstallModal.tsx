@@ -66,9 +66,9 @@ export const PWAInstallModal: React.FC<PWAInstallModalProps> = (props) => {
           onClose();
         }
       }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in overflow-y-auto"
     >
-      <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-cozy-darkCard p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-5 max-h-[90vh] overflow-y-auto">
+      <div className="w-full max-w-lg rounded-3xl bg-white dark:bg-cozy-darkCard p-4 sm:p-6 border border-purple-100 dark:border-purple-900/40 shadow-soft-xl space-y-5 max-h-[calc(100dvh-1.5rem)] overflow-y-auto my-auto flex flex-col">
         {/* Header with App Brand */}
         <div className="flex items-center justify-between pb-3 border-b border-purple-100/60 dark:border-purple-900/30">
           <div className="flex items-center gap-3">
